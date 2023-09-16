@@ -1,0 +1,54 @@
+<%- include("partials/header.ejs") %>
+
+<% var answers = question.incorrect_answers.slice(0) %>
+<% answers.push(question.correct_answer) %>
+<% answers.sort() %>
+
+<div class="container text-center d-flex flex-column min-vh-100 w-75 main-container">
+    <!-- <img class="d-block mx-auto mb-4" src="/docs/5.3/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57"> -->
+    <div class="col-lg-9 m-auto">
+        <h1 class="display-5 fw-bold text-body-emphasis">Question <%=counter  %> / <%= totalQuestions %></h1>
+        <p class="lead mb-4"><%- question.question %></p>
+        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+            <div class="container d-flex flex-column">
+                <form action="/quiz" method="post">
+                    <% answers.forEach((answer) => { %>
+                        <div class="mb-4">
+                            <% if (answer === question.correct_answer) { %>
+                                <input type="button" class="answer right btn btn-light form-control" value="<%- answer %>">
+                            <% } else { %>
+                                <input type="button" class="answer wrong btn btn-light form-control" value="<%- answer %>">
+                            <% } %>
+                        </div>
+                    <% }) %>
+                    <!-- input nascosto per passare il valore del bottone che premo al backend (vedi script sotto) -->
+                    <input type="hidden" id="selected-answer" name="selected-answer">
+                    <button type="submit" class="btn btn-primary d-none ">Next</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+<script>
+    $("input.answer").on("click", function() {
+        if ($(this).hasClass("right")) {
+            $(this).removeClass("btn-light");
+            $(this).addClass("btn-success");
+        } else {
+            $(this).removeClass("btn-light");
+            $(this).addClass("btn-danger");
+            $(":button.right").removeClass("btn-light");
+            $(":button.right").addClass("btn-success");
+        };
+        var selectedAnswer = $(this).val();
+        $("#selected-answer").val(selectedAnswer);
+        $("input.answer").prop("disabled", true);
+        $(":submit").removeClass("d-none");
+    });
+</script>
+
+<%- include("partials/footer.ejs") %>

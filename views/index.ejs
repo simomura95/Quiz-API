@@ -1,0 +1,61 @@
+<%- include("partials/header.ejs") %>
+
+<div class="container text-center d-flex flex-column min-vh-100 w-75 main-container">
+    <div class="col-lg-9 m-auto">
+        <h1 class="display-5 fw-bold text-body-emphasis">Trivia time!</h1>
+        <p class="lead mb-4">Choose your quiz options and start</p>
+        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+            <div class="container">
+                <form action="/getQuestions" method="post">
+                    <div class="mb-4">
+                        <label for="questions" class="form-label">Number of questions:</label>
+                        <input type="number" name="questions" min="1" max="50" value="10" class="form-control">
+                    </div>
+                    <div class="mb-4">
+                        <label for="category" class="form-label">Choose a category:</label>
+                        <select name="category" class="form-control">
+                            <option value="">Any category</option>
+                            <option value="27">Animals</option>
+                            <option value="25">Art</option>
+                            <option value="16">Board Games</option>
+                            <option value="10">Books</option>
+                            <option value="31">Cartoon & Animations</option>
+                            <option value="26">Celebrities</option>
+                            <option value="29">Comics</option>
+                            <option value="18">Computers</option>
+                            <option value="11">Film</option>
+                            <option value="9">General knowledge</option>
+                            <option value="22">Geography</option>
+                            <option value="23">History</option>
+                            <option value="30">Japanese Anime & Manga</option>
+                            <option value="19">Mathematics</option>
+                            <option value="12">Music</option>
+                            <option value="13">Musical & Theaters</option>
+                            <option value="20">Mythology</option>
+                            <option value="24">Politics</option>
+                            <option value="17">Science & nature</option>
+                            <option value="21">Sports</option>
+                            <option value="14">Television</option>
+                            <option value="28">Vehicles</option>
+                            <option value="15">Video Games</option>
+                        </select>
+                    </div>
+                    <div class="mb-4">
+                        <label for="difficulty" class="form-label">Choose a difficulty:</label>
+                        <select name="difficulty" class="form-control">
+                            <option value="">Any difficulty</option>
+                            <option value="easy">Easy</option>
+                            <option value="medium">Medium</option>
+                            <option value="hard">Hard</option>
+                        </select>
+                    </div>
+                    <div class="mb-4">
+                        <input type="submit" value="Start quiz" class="btn btn-primary">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include("partials/footer.ejs") %>
